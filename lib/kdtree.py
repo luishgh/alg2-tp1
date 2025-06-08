@@ -14,13 +14,15 @@ class KDTreeNode:
         self.r = r
 
 class KDTree:
-    def __init__(self, points, k=2):
+    def __init__(self, points, get_axis, k=2):
         """
         K dimensional tree (KD-Tree) for efficient range queries.
-        points: list of points, each point is a list of coordinates
+        points: list of points
+        get_axis: function that returns the axis value for a point (0-based)
         k: number of dimensions (default is 2)
         """
         self.k = k
+        self.get_axis = get_axis
         if points:
             self.root = self.build(points, depth=0)
         else:
@@ -38,10 +40,10 @@ class KDTree:
         axis = depth % self.k
 
         # Sort points by the current axis and choose the median as the pivot
-        points.sort(key=lambda x: x[axis])
+        points.sort(key=lambda p: self.get_axis(p, axis))
         median_index = len(points) // 2
 
-        node = KDTreeNode(point=points[median_index], l = points[0][axis], r = points[-1][axis])
+        node = KDTreeNode(point=points[median_index], l = self.get_axis(points[0], axis), r = self.get_axis(points[-1], axis))
         node.left = self.build(points[:median_index], depth + 1)
         node.right = self.build(points[median_index + 1:], depth + 1)
 
@@ -63,13 +65,13 @@ class KDTree:
             return
         
         # Check if the point is within all range
-        if all(ll <= node.point[i] <= rr for i, (ll, rr) in enumerate(ranges)):
+        if all(ll <= self.get_axis(node.point, i) <= rr for i, (ll, rr) in enumerate(ranges)):
             results.append(node.point)
 
         # Traverse left or right subtree based on the current axis
-        if node.left and l <= node.point[axis]:
+        if node.left and l <= self.get_axis(node.point, axis):
             self._query(node.left, ranges, depth + 1, results)
-        if node.right and r >= node.point[axis]:
+        if node.right and r >= self.get_axis(node.point, axis):
             self._query(node.right, ranges, depth + 1, results)
         
             
