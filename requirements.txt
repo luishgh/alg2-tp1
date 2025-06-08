@@ -1,0 +1,7 @@
+pandas
+numpy
+dash_leaflet
+geopy
+tqdm
+bs4
+unidecode
