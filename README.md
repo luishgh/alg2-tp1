@@ -10,6 +10,10 @@ Esse repositório contém o primeiro trabalho prático desenvolvido para o curso
 
 Toda a implementação foi realizada em Python 3.
 
+### Processamento dos Dados
+
+O processamento dos dados esta implementado no notebook Jupyter...
+
 ### Interface
 O app interativo foi desenvolvido utilizando a biblioteca...
 
