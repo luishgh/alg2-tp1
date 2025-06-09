@@ -5,9 +5,12 @@ from dash_extensions.enrich import DashProxy, Input, Output, State, html
 from dash_extensions.javascript import assign
 from dash import dash_table
 from pprint import pprint 
+import os
 
+port = int(os.environ.get("PORT", 10000))
 
 from lib.kdtree import KDTree
+
 
 def get_axis(point, axis):
     if axis == 1:  # Latitude
@@ -249,4 +252,4 @@ def update_selected(rectangle_geojson):
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=port)
