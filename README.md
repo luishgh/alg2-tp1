@@ -4,7 +4,7 @@ Esse repositório contém o primeiro trabalho prático desenvolvido para o curso
 
 ## Integrantes
 - [Luis Henrique Gomes Higino](https://github.com/luishgh)
-- [Victoria Reis](https://github.com/Victoria-Reiss)
+- [Victoria Oliveira dos Reis](https://github.com/Victoria-Reiss)
 
 ## Implementação
 
